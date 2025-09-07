@@ -1,20 +1,16 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'providers/app_state.dart';
-import 'screens/home_screen.dart'; 
+import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   final appState = AppState();
   await appState.initialize();
 
-  runApp(ChangeNotifierProvider.value(
-    value: appState,
-    child: const MyApp(),
-  ));
+  runApp(ChangeNotifierProvider.value(value: appState, child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +21,10 @@ class MyApp extends StatelessWidget {
     const Color primarySeedColor = Colors.teal;
 
     final TextTheme appTextTheme = TextTheme(
-      displayLarge: GoogleFonts.oswald(fontSize: 57, fontWeight: FontWeight.bold),
+      displayLarge: GoogleFonts.oswald(
+        fontSize: 57,
+        fontWeight: FontWeight.bold,
+      ),
       titleLarge: GoogleFonts.roboto(fontSize: 22, fontWeight: FontWeight.w500),
       bodyMedium: GoogleFonts.openSans(fontSize: 14),
     );
@@ -40,7 +39,10 @@ class MyApp extends StatelessWidget {
       appBarTheme: AppBarTheme(
         backgroundColor: primarySeedColor,
         foregroundColor: Colors.white,
-        titleTextStyle: GoogleFonts.oswald(fontSize: 24, fontWeight: FontWeight.bold),
+        titleTextStyle: GoogleFonts.oswald(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -48,7 +50,10 @@ class MyApp extends StatelessWidget {
           backgroundColor: primarySeedColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: GoogleFonts.roboto(fontSize: 16, fontWeight: FontWeight.w500),
+          textStyle: GoogleFonts.roboto(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     );
@@ -57,7 +62,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'OT Roster',
       theme: theme,
-      home: const HomeScreen(), 
+      home: const HomeScreen(),
     );
   }
 }

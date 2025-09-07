@@ -1,15 +1,17 @@
 class Leave {
   final String id;
   final String staffId;
-  final DateTime date;
+  final DateTime startDate;
+  final DateTime endDate;
 
-  Leave({required this.id, required this.staffId, required this.date});
+  Leave({required this.id, required this.staffId, required this.startDate, required this.endDate});
 
   factory Leave.fromJson(Map<String, dynamic> json) {
     return Leave(
       id: json['id'],
       staffId: json['staffId'],
-      date: DateTime.parse(json['date']),
+      startDate: DateTime.parse(json['startDate']),
+      endDate: DateTime.parse(json['endDate']),
     );
   }
 
@@ -17,7 +19,8 @@ class Leave {
     return {
       'id': id,
       'staffId': staffId,
-      'date': date.toIso8601String(),
+      'startDate': startDate.toIso8601String(),
+      'endDate': endDate.toIso8601String(),
     };
   }
 }

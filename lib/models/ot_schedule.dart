@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class OT {
@@ -38,18 +37,18 @@ class Surgery {
   }
 
   factory Surgery.fromJson(Map<String, dynamic> json) => Surgery(
-        id: json['id'],
-        otId: json['otId'],
-        patientName: json['patientName'],
-        procedure: json['procedure'],
-        surgeonId: json['surgeonId'],
-      );
+    id: json['id'],
+    otId: json['otId'],
+    patientName: json['patientName'],
+    procedure: json['procedure'],
+    surgeonId: json['surgeonId'],
+  );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'otId': otId,
-        'patientName': patientName,
-        'procedure': procedure,
-        'surgeonId': surgeonId,
-      };
+    'id': id,
+    'otId': otId,
+    'patientName': patientName,
+    'procedure': procedure,
+    'surgeonId': surgeonId,
+  };
 }

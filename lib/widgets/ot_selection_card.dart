@@ -8,7 +8,18 @@ class OtSelectionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-    final availableOts = ['OT 1', 'OT 2', 'OT 3', 'OT 4', 'OT 5', 'OT 6', 'OT 7', 'OT 8', 'OT 9', 'OT 10'];
+    final availableOts = [
+      'OT 1',
+      'OT 2',
+      'OT 3',
+      'OT 4',
+      'OT 5',
+      'OT 6',
+      'OT 7',
+      'OT 8',
+      'OT 9',
+      'OT 10',
+    ];
 
     return Card(
       elevation: 5,
@@ -18,7 +29,10 @@ class OtSelectionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Select Available OTs for Today', style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              'Select Available OTs for Today',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             const SizedBox(height: 16),
             Wrap(
               spacing: 8.0,

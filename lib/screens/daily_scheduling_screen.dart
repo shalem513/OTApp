@@ -23,7 +23,10 @@ class DailySchedulingScreen extends StatelessWidget {
               const SizedBox(height: 24),
               SurgerySchedulingCard(),
             ],
-            if (appState.surgeries.isNotEmpty && appState.surgeries.any((s) => s.patientName != null && s.patientName!.isNotEmpty)) ...[
+            if (appState.surgeries.isNotEmpty &&
+                appState.surgeries.any(
+                  (s) => s.patientName != null && s.patientName!.isNotEmpty,
+                )) ...[
               const SizedBox(height: 24),
               StaffAllocationCard(),
             ],

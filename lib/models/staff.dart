@@ -1,17 +1,11 @@
-
-enum StaffRole {
-  Nurse,
-  Assistant,
-  Technician,
-}
+enum StaffRole { Nurse, OT_Technician, Anesthesian }
 
 class Staff {
   final String id;
   final String name;
   final StaffRole role;
-  final String department;
 
-  Staff({required this.id, required this.name, required this.role, required this.department});
+  Staff({required this.id, required this.name, required this.role});
 
   factory Staff.fromJson(Map<String, dynamic> json) {
     return Staff(
@@ -21,16 +15,10 @@ class Staff {
         (e) => e.toString() == json['role'],
         orElse: () => StaffRole.Nurse, // Default value
       ),
-      department: json['department'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'role': role.toString(),
-      'department': department,
-    };
+    return {'id': id, 'name': name, 'role': role.toString()};
   }
 }

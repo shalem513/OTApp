@@ -82,8 +82,15 @@ class AppState with ChangeNotifier {
   void generateSundayRoster() {
     final today = DateTime.now();
     final nextSunday = today.add(Duration(days: 7 - today.weekday));
-    final leaveOnSunday = _leave.where((l) =>
-    l.date.year == nextSunday.year && l.date.month == nextSunday.month && l.date.day == nextSunday.day).map((l) => l.staffId).toList();
+    final leaveOnSunday = _leave
+        .where(
+          (l) =>
+              l.date.year == nextSunday.year &&
+              l.date.month == nextSunday.month &&
+              l.date.day == nextSunday.day,
+        )
+        .map((l) => l.staffId)
+        .toList();
     _sundayRoster = _staff.where((s) => !leaveOnSunday.contains(s.id)).toList();
     notifyListeners();
   }

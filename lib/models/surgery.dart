@@ -1,4 +1,3 @@
-
 class Surgery {
   final String id;
   final String otId;

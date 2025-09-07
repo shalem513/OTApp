@@ -18,12 +18,16 @@ class StaffAllocationCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Allocate Staff', style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              'Allocate Staff',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             const SizedBox(height: 16),
             ...appState.surgeries
-                .where((s) => s.patientName != null && s.patientName!.isNotEmpty)
-                .map((surgery) => _buildStaffAllocationRow(context, surgery))
-                ,
+                .where(
+                  (s) => s.patientName != null && s.patientName!.isNotEmpty,
+                )
+                .map((surgery) => _buildStaffAllocationRow(context, surgery)),
           ],
         ),
       ),
@@ -39,7 +43,10 @@ class StaffAllocationCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('${surgery.otId}: ${surgery.patientName}', style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            '${surgery.otId}: ${surgery.patientName}',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: 12),
           Wrap(
             spacing: 8.0,

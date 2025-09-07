@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/models.dart';
@@ -14,7 +13,6 @@ class StaffManagementCard extends StatefulWidget {
 class _StaffManagementCardState extends State<StaffManagementCard> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
-  final _departmentController = TextEditingController();
   StaffRole _selectedRole = StaffRole.Nurse;
 
   void _addStaff() {
@@ -23,11 +21,9 @@ class _StaffManagementCardState extends State<StaffManagementCard> {
         id: DateTime.now().toString(),
         name: _nameController.text,
         role: _selectedRole,
-        department: _departmentController.text,
       );
       Provider.of<AppState>(context, listen: false).addStaff(newStaff);
       _nameController.clear();
-      _departmentController.clear();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Staff added successfully!')),
       );
@@ -48,7 +44,10 @@ class _StaffManagementCardState extends State<StaffManagementCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Staff Management', style: Theme.of(context).textTheme.titleLarge),
+              Text(
+                'Staff Management',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: _nameController,
@@ -65,27 +64,12 @@ class _StaffManagementCardState extends State<StaffManagementCard> {
                 },
               ),
               const SizedBox(height: 16),
-              TextFormField(
-                controller: _departmentController,
-                decoration: const InputDecoration(
-                  labelText: 'Department',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.business),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a department';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
               DropdownButtonFormField<StaffRole>(
                 initialValue: _selectedRole,
                 decoration: const InputDecoration(
                   labelText: 'Role',
                   border: OutlineInputBorder(),
-                   prefixIcon: Icon(Icons.work),
+                  prefixIcon: Icon(Icons.work),
                 ),
                 onChanged: (StaffRole? newValue) {
                   if (newValue != null) {
@@ -95,7 +79,12 @@ class _StaffManagementCardState extends State<StaffManagementCard> {
                   }
                 },
                 items: StaffRole.values.map((role) {
-                  return DropdownMenuItem(value: role, child: Text(role.toString().split('.').last));
+                  return DropdownMenuItem(
+                    value: role,
+                    child: Text(
+                      role.toString().split('.').last.replaceAll('_', ' '),
+                    ),
+                  );
                 }).toList(),
               ),
               const SizedBox(height: 20),
@@ -107,7 +96,10 @@ class _StaffManagementCardState extends State<StaffManagementCard> {
                 ),
               ),
               const SizedBox(height: 24),
-              Text('Staff List', style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                'Staff List',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               const Divider(),
               if (appState.staff.isEmpty)
                 const Padding(
@@ -124,15 +116,23 @@ class _StaffManagementCardState extends State<StaffManagementCard> {
                     return ListTile(
                       leading: CircleAvatar(child: Text(staff.name[0])),
                       title: Text(staff.name),
-                      subtitle: Text('${staff.department} - ${staff.role.toString().split('.').last}'),
-
+                      subtitle: Text(
+                        staff.role
+                            .toString()
+                            .split('.')
+                            .last
+                            .replaceAll('_', ' '),
+                      ),
                       trailing: IconButton(
                         icon: const Icon(Icons.delete, color: Colors.redAccent),
                         onPressed: () {
-                          Provider.of<AppState>(context, listen: false).removeStaff(staff.id);
+                          Provider.of<AppState>(
+                            context,
+                            listen: false,
+                          ).removeStaff(staff.id);
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Staff removed.')),
-                         );
+                          );
                         },
                       ),
                     );

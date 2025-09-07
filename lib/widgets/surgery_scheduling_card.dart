@@ -24,13 +24,21 @@ class _SurgerySchedulingCardState extends State<SurgerySchedulingCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Schedule Surgeries', style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              'Schedule Surgeries',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             const SizedBox(height: 16),
             ...appState.selectedOts.map((ot) {
               final surgery = appState.surgeries.firstWhere(
-                    (s) => s.otId == ot,
-                orElse: () =>
-                    Surgery(id: '', otId: ot, patientName: null, procedure: null, surgeonId: null),
+                (s) => s.otId == ot,
+                orElse: () => Surgery(
+                  id: '',
+                  otId: ot,
+                  patientName: null,
+                  procedure: null,
+                  surgeonId: null,
+                ),
               );
               return _buildSurgeryForm(context, ot, surgery);
             }),
@@ -42,7 +50,9 @@ class _SurgerySchedulingCardState extends State<SurgerySchedulingCard> {
 
   Widget _buildSurgeryForm(BuildContext context, String ot, Surgery surgery) {
     final appState = Provider.of<AppState>(context, listen: false);
-    final patientNameController = TextEditingController(text: surgery.patientName);
+    final patientNameController = TextEditingController(
+      text: surgery.patientName,
+    );
     final procedureController = TextEditingController(text: surgery.procedure);
     Surgeon? selectedSurgeon = surgery.surgeonId != null
         ? appState.surgeons.firstWhere((s) => s.id == surgery.surgeonId)
@@ -63,11 +73,12 @@ class _SurgerySchedulingCardState extends State<SurgerySchedulingCard> {
             ),
             onChanged: (value) {
               final newSurgery = Surgery(
-                  id: surgery.id,
-                  otId: surgery.otId,
-                  patientName: value,
-                  procedure: surgery.procedure,
-                  surgeonId: surgery.surgeonId);
+                id: surgery.id,
+                otId: surgery.otId,
+                patientName: value,
+                procedure: surgery.procedure,
+                surgeonId: surgery.surgeonId,
+              );
               appState.updateSurgery(newSurgery);
             },
           ),
@@ -80,11 +91,12 @@ class _SurgerySchedulingCardState extends State<SurgerySchedulingCard> {
             ),
             onChanged: (value) {
               final newSurgery = Surgery(
-                  id: surgery.id,
-                  otId: surgery.otId,
-                  patientName: surgery.patientName,
-                  procedure: value,
-                  surgeonId: surgery.surgeonId);
+                id: surgery.id,
+                otId: surgery.otId,
+                patientName: surgery.patientName,
+                procedure: value,
+                surgeonId: surgery.surgeonId,
+              );
               appState.updateSurgery(newSurgery);
             },
           ),
@@ -97,15 +109,19 @@ class _SurgerySchedulingCardState extends State<SurgerySchedulingCard> {
             ),
             onChanged: (Surgeon? newValue) {
               final newSurgery = Surgery(
-                  id: surgery.id,
-                  otId: surgery.otId,
-                  patientName: surgery.patientName,
-                  procedure: surgery.procedure,
-                  surgeonId: newValue?.id);
+                id: surgery.id,
+                otId: surgery.otId,
+                patientName: surgery.patientName,
+                procedure: surgery.procedure,
+                surgeonId: newValue?.id,
+              );
               appState.updateSurgery(newSurgery);
             },
             items: appState.surgeons.map((surgeon) {
-              return DropdownMenuItem(value: surgeon, child: Text(surgeon.name));
+              return DropdownMenuItem(
+                value: surgeon,
+                child: Text(surgeon.name),
+              );
             }).toList(),
           ),
         ],
